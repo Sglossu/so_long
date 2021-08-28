@@ -1,36 +1,92 @@
 #include <so_long.h>
 
-static	void	ft_w(t_struct *slg)
-{
-	slg->tab[slg->p_y + 1][slg->p_x] = 'P';
-	slg->tab[slg->p_y][slg->p_x] = '0';
-	slg->p_y++;
-}
-
 static	void	ft_s(t_struct *slg)
 {
-	slg->tab[slg->p_y - 1][slg->p_x] = 'P';
-	slg->tab[slg->p_y][slg->p_x] = '0';
-	slg->p_y--;
+	if (slg->tab[slg->p_y + 1][slg->p_x] == 'C')
+	{
+		slg->tab[slg->p_y + 1][slg->p_x] = '0';
+		slg->cltb--;
+	}
+	if (slg->tab[slg->p_y + 1][slg->p_x] == 'E' && !slg->cltb)
+		exit (0);
+	if (slg->tab[slg->p_y + 1][slg->p_x] == '0')
+	{
+		slg->tab[slg->p_y + 1][slg->p_x] = 'P';
+		slg->tab[slg->p_y][slg->p_x] = '0';
+		slg->p_y++;
+		mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
+		draw(slg); // draw map
+		slg->step++;
+		printf("step %d\n", slg->step);
+	}
+}
+
+static	void	ft_w(t_struct *slg)
+{
+	if (slg->tab[slg->p_y - 1][slg->p_x] == 'C')
+	{
+		slg->tab[slg->p_y - 1][slg->p_x] = '0';
+		slg->cltb--;
+	}
+	if (slg->tab[slg->p_y - 1][slg->p_x] == 'E' && !slg->cltb)
+		exit (0);
+	if (slg->tab[slg->p_y - 1][slg->p_x] == '0')
+	{
+		slg->tab[slg->p_y - 1][slg->p_x] = 'P';
+		slg->tab[slg->p_y][slg->p_x] = '0';
+		slg->p_y--;
+		mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
+		draw(slg); // draw map
+		slg->step++;
+		printf("step %d\n", slg->step);
+	}
 }
 
 static	void	ft_a(t_struct *slg)
 {
-	slg->tab[slg->p_y][slg->p_x - 1] = 'P';
-	slg->tab[slg->p_y][slg->p_x] = '0';
-	slg->p_x--;
+	if (slg->tab[slg->p_y][slg->p_x - 1] == 'C')
+	{
+		slg->tab[slg->p_y][slg->p_x - 1] = '0';
+		slg->cltb--;
+	}
+	if (slg->tab[slg->p_y][slg->p_x - 1] == 'E' && !slg->cltb)
+		exit (0);
+	if (slg->tab[slg->p_y][slg->p_x - 1] == '0')
+	{
+		slg->tab[slg->p_y][slg->p_x - 1] = 'P';
+		slg->tab[slg->p_y][slg->p_x] = '0';
+		slg->p_x--;
+		mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
+		draw(slg); // draw map
+		slg->step++;
+		printf("step %d\n", slg->step);
+	}
 }
 
 static	void	ft_d(t_struct *slg)
 {
-	slg->tab[slg->p_y][slg->p_x + 1] = 'P';
-	slg->tab[slg->p_y][slg->p_x] = '0';
-	slg->p_x++;
+	if (slg->tab[slg->p_y][slg->p_x + 1] == 'C')
+	{
+		slg->tab[slg->p_y][slg->p_x + 1] = '0';
+		slg->cltb--;
+	}
+	if (slg->tab[slg->p_y][slg->p_x + 1] == 'E' && !slg->cltb)
+		exit (0);
+	if (slg->tab[slg->p_y][slg->p_x + 1] == '0')
+	{
+		slg->tab[slg->p_y][slg->p_x + 1] = 'P';
+		slg->tab[slg->p_y][slg->p_x] = '0';
+		slg->p_x++;
+		mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
+		draw(slg); // draw map
+		slg->step++;
+		printf("step %d\n", slg->step);
+	}
 }
 
 void	play(t_struct *slg)
 {
-	slg->but = mlx_key_hook(slg->mlx_win, key_hook, &slg);
+	// printf("2\n");
 	if (slg->but == W)
 		ft_w(slg);
 	else if (slg->but == S)
@@ -38,5 +94,6 @@ void	play(t_struct *slg)
 	else if (slg->but == A)
 		ft_a(slg);
 	else if (slg->but == D)
-		ft_d(slg);	
+		ft_d(slg);
+	
 }

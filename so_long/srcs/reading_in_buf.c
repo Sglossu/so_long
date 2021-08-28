@@ -36,6 +36,8 @@ void	reading_in_buf(t_struct *slg, int fd)
 				slg->p_x = j;
 				slg->p_y = i;
 			}
+			if (buff == 'C')
+				slg->cltb++;
 			slg->tab[i][j] = buff;
 			byte = read(fd, &buff, 1);
 			j++;

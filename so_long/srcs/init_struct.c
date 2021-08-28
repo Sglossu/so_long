@@ -14,5 +14,8 @@ t_struct	init_struct(t_struct slg)
 	slg.scale = 10;
 	slg.p_x = 0;
 	slg.p_y = 0;
+	slg.cltb = 0;
+	slg.scale = 20;
+	slg.step = 0;
 	return (slg);
 }

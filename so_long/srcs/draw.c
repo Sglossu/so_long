@@ -1,29 +1,47 @@
 #include <so_long.h>
 
-void	draw_image(t_struct *img, int i, int j, int color)
+void	draw_image(t_struct *slg, int i, int j, int color)
 {
 	int	x;
 	int	y;
-	int scale = 20;
 
-	i *= scale;
-	j *= scale;
+	i *= slg->scale;
+	j *= slg->scale;
 	y = 0;
-	while (y++ < scale)
+	while (y < slg->scale)
 	{
 		x = 0;
-		while (x++ < scale)
-			my_mlx_pixel_put(img, x + i, y + j, color);
+		while (x < slg->scale)
+		{
+			my_mlx_pixel_put(slg, x + i, y + j, color);
+			x++;
+		}
+		y++;
 	}
 }
 
-void	draw(t_struct *slg, char c)
+void	real_draw(t_struct *slg, char *relative_path, int i, int j)
+{
+	int		img_width;
+	int		img_height;
+	void	*img;
+
+	img = mlx_xpm_file_to_image(slg->img.mlx_ptr, relative_path, &img_width, &img_height);
+	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, img, i * slg->scale, j * slg->scale);
+	if (img == NULL)
+	{
+		ft_putstr_fd("error/n", 1);
+		exit (-1);
+	}
+
+
+}
+
+void	draw(t_struct *slg)
 {
 	int	i;
 	int	j;
 
-	
-	slg->tab[slg->p_y][slg->p_x] = c;
 	j = 0;
 	while (j < slg->y_len)
 	{
@@ -31,15 +49,20 @@ void	draw(t_struct *slg, char c)
 		while (i < slg->x_len)
 		{
 			if (slg->tab[j][i] == '1')
-				draw_image(slg, i, j, 0x00FF0000);
+				// draw_image(slg, i, j, 0x00FF0000);
+				real_draw(slg, "texture/wall.xpm",  i, j);
 			if (slg->tab[j][i] == '0')
-				draw_image(slg, i, j, 0x00003300);
+				// draw_image(slg, i, j, 0x009999FF);
+				real_draw(slg, "texture/empty.xpm",  i, j);
 			if (slg->tab[j][i] == 'C')
-				draw_image(slg, i, j, 0x00009933);
+				// draw_image(slg, i, j, 0x00000000);
+				real_draw(slg, "texture/thing.xpm",  i, j);
 			if (slg->tab[j][i] == 'P')
-				draw_image(slg, i, j, 0x0000FFCC);	
+				// draw_image(slg, i, j, 0x009FFF00);	
+				real_draw(slg, "texture/player.xpm", i, j);
 			if (slg->tab[j][i] == 'E')
-				draw_image(slg, i, j, 0x000066FF);	
+				// draw_image(slg, i, j, 0x00000055);	
+				real_draw(slg, "texture/exit.xpm",  i, j);	
 			i++;
 		}
 		j++;

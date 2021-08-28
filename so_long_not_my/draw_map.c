@@ -32,6 +32,7 @@ static void	set_new_image(t_lon **lon, char *textu, void *image, char c)
 			{
 				image = mlx_xpm_file_to_image((*lon)->mlx, textu, \
 				&(*lon)->width, &(*lon)->hight);
+				printf("%p", image);
 				if ((*lon)->map.array[y][x] == 'P')
 				{
 					(*lon)->y = x;

@@ -1,14 +1,14 @@
 #include <so_long.h>
 
-static	void	free_al(t_struct *slg)
-{
-	int		i;
+// static	void	free_al(t_struct *slg)
+// {
+// 	int		i;
 
-	i = 0;
-	while (slg->tab[i])
-		free(slg->tab[i++]);
-	free(slg->tab);
-}
+// 	i = 0;
+// 	while (slg->tab[i])
+// 		free(slg->tab[i++]);
+// 	free(slg->tab);
+// }
 
 // static	void	draw_tab(t_struct *slg)
 // {
@@ -48,9 +48,10 @@ int	main(void)
 	close(fd);
 
 	// draw_tab(&slg);
+	if (slg.valid)
+		minilibx(&slg);
 
-	minilibx(&slg);
-
-	free_al(&slg);
+	exit(0);
+	// free_al(&slg);
 	return (0);
 }
