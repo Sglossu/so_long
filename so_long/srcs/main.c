@@ -22,7 +22,24 @@
 // 	}
 // }
 
-int	main(void)
+static	void	valid_arguments(t_struct *slg, int argc, char **argv)
+{
+	if (argc != 2)
+		slg->valid = 0;
+	else
+	{
+		slg->name_map = (char *)malloc(sizeof(char) * (ft_strlen(argv[1]) + 1));
+		if (slg->name_map == NULL)
+		{
+			slg->valid = 0;
+			return;
+		}
+		slg->name_map = argv[1];
+		printf("%s\n", slg->name_map);
+	}
+}
+
+int	main(int argc, char **argv)
 {
 	int			fd;
 	t_struct	slg;
@@ -30,20 +47,21 @@ int	main(void)
 	slg.valid = 1;
 	slg = init_struct(slg);
 
-	fd = open("map.ber", O_RDONLY);
+	valid_arguments(&slg, argc, argv);
+	fd = open(slg.name_map, O_RDONLY);
 	if (fd < 0)
 		slg.valid = 0;
 	if (slg.valid)
 		slg = read_and_valid(slg, fd);
 	close(fd);
 	
-	fd = open("map.ber", O_RDONLY);
+	fd = open(slg.name_map, O_RDONLY);
 	if (fd < 0)
 		slg.valid = 0;
 	reading_in_buf(&slg, fd);
 
 	if (!slg.valid)
-		ft_putstr_fd("error\n", 1);
+		ft_putstr_fd("error4\n", 1);
 
 	close(fd);
 

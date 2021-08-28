@@ -46,6 +46,7 @@ typedef struct	s_struct
 	int		cltb;
 	int		step;
 	t_data	img;
+	char	*name_map;
 }				t_struct;
 
 t_struct	init_struct(t_struct slg);

@@ -1,24 +1,24 @@
 #include <so_long.h>
 
-void	draw_image(t_struct *slg, int i, int j, int color)
-{
-	int	x;
-	int	y;
+// void	draw_image(t_struct *slg, int i, int j, int color)
+// {
+// 	int	x;
+// 	int	y;
 
-	i *= slg->scale;
-	j *= slg->scale;
-	y = 0;
-	while (y < slg->scale)
-	{
-		x = 0;
-		while (x < slg->scale)
-		{
-			my_mlx_pixel_put(slg, x + i, y + j, color);
-			x++;
-		}
-		y++;
-	}
-}
+// 	i *= slg->scale;
+// 	j *= slg->scale;
+// 	y = 0;
+// 	while (y < slg->scale)
+// 	{
+// 		x = 0;
+// 		while (x < slg->scale)
+// 		{
+// 			my_mlx_pixel_put(slg, x + i, y + j, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
 void	real_draw(t_struct *slg, char *relative_path, int i, int j)
 {
@@ -27,7 +27,10 @@ void	real_draw(t_struct *slg, char *relative_path, int i, int j)
 	void	*img;
 
 	img = mlx_xpm_file_to_image(slg->img.mlx_ptr, relative_path, &img_width, &img_height);
-	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, img, i * slg->scale, j * slg->scale);
+	printf("img_width: %d, img_height: %d\n", img_width, img_height);
+	// printf("i * slg->scale: %d, j * slg->scale: %d\n", (i * slg->scale), (j * slg->scale));
+	printf("slg->scale: %d\n", slg->scale);
+	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, img, i * (slg->scale - 1), j * (slg->scale - 1));
 	if (img == NULL)
 	{
 		ft_putstr_fd("error/n", 1);
@@ -53,13 +56,16 @@ void	draw(t_struct *slg)
 				real_draw(slg, "texture/wall.xpm",  i, j);
 			if (slg->tab[j][i] == '0')
 				// draw_image(slg, i, j, 0x009999FF);
-				real_draw(slg, "texture/empty.xpm",  i, j);
+				real_draw(slg, "texture/back2.xpm",  i, j);
 			if (slg->tab[j][i] == 'C')
 				// draw_image(slg, i, j, 0x00000000);
 				real_draw(slg, "texture/thing.xpm",  i, j);
 			if (slg->tab[j][i] == 'P')
+			{
 				// draw_image(slg, i, j, 0x009FFF00);	
-				real_draw(slg, "texture/player.xpm", i, j);
+				real_draw(slg, "texture/back2.xpm", i, j);
+				real_draw(slg, "texture/ALEXANDRA.xpm", i, j);
+			}
 			if (slg->tab[j][i] == 'E')
 				// draw_image(slg, i, j, 0x00000055);	
 				real_draw(slg, "texture/exit.xpm",  i, j);	
