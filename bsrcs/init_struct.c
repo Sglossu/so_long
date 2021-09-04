@@ -19,22 +19,52 @@ t_struct	init_struct(t_struct slg)
 	slg.step = 0;
 	slg.ani = 0;
 	slg.count_img = 0;
+	slg.next_button = '\0';
+	slg.but = 0;
 	slg.img.player_cur = "texture/ping_right_close.xpm";
-	slg.img.player_r = "texture/ping_right_open.xpm";
-	slg.img.player_l = "texture/ping_right_close.xpm";
+	slg.img.player_or = "texture/ping_right_open.xpm";
+	slg.img.player_cr = "texture/ping_right_close.xpm";
+	slg.img.player_ol = "texture/ping_left_open.xpm";
+	slg.img.player_cl = "texture/ping_left_close.xpm";
 	return (slg);
 }
 
 void	init_player_struct_d(t_struct *slg)
 {
-	slg->img.player_cur = "texture/ping_right_close.xpm";
-	slg->img.player_r = "texture/ping_right_open.xpm";
-	slg->img.player_l = "texture/ping_right_close.xpm";
+	slg->img.player_cur = slg->img.player_or;
+	slg->img.player_open = slg->img.player_or;
+	slg->img.player_close = slg->img.player_cr;
 }
 
 void	init_player_struct_a(t_struct *slg)
 {
-	slg->img.player_cur = "texture/ping_left_close.xpm";
-	slg->img.player_r = "texture/ping_left_open.xpm";
-	slg->img.player_l = "texture/ping_left_close.xpm";
+	slg->img.player_cur = slg->img.player_ol;
+	slg->img.player_open = slg->img.player_ol;
+	slg->img.player_close = slg->img.player_cl;
+}
+
+void	init_picture(t_struct *slg)
+{
+	int	img_width;
+	int	img_height;
+
+	slg->img.player_cur = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ping_right_close.xpm", &img_width, &img_height);
+	slg->img.player_open = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ping_right_open.xpm", &img_width, &img_height);
+	slg->img.player_close = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ping_right_close.xpm", &img_width, &img_height);
+	slg->img.player_or = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ping_right_open.xpm", &img_width, &img_height);
+	slg->img.player_cr = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ping_right_close.xpm", &img_width, &img_height);
+	slg->img.player_ol = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ping_left_open.xpm", &img_width, &img_height);
+	slg->img.player_cl = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ping_left_close.xpm", &img_width, &img_height);
+	slg->img.exit = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ice_hole.xpm", &img_width, &img_height);
+	slg->img.wall = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/ice.xpm", &img_width, &img_height);
+	slg->img.enemy = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/sea_lion.xpm", &img_width, &img_height);
+	slg->img.thing = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/heart.xpm", &img_width, &img_height);
+	slg->img.back = mlx_xpm_file_to_image(slg->img.mlx_ptr, "texture/back_snow.xpm", &img_width, &img_height);
+	if (!slg->img.player_cur || !slg->img.exit || !slg->img.wall || !slg->img.enemy || !slg->img.thing || !slg->img.back \
+	|| !slg->img.player_open || !slg->img.player_close || !slg->img.player_or || !slg->img.player_cr || !slg->img.player_ol \
+	|| !slg->img.player_cl)
+	{
+		ft_putstr_fd("error\n", 1);
+		exit (-1);
+	}
 }

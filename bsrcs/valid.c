@@ -48,7 +48,7 @@ static	void	other_lines(t_struct *slg, char *line)
 		else if (line[i] == 'E')
 			slg->exit = 'E';
 		else if (line[i] == 'V')
-			slg->exit = 'V';
+			slg->enemy = 'V';
 		else if (line[i] == 'P')
 		{
 			if (slg->plr)
@@ -85,9 +85,10 @@ static	t_struct valid_number_gnl(t_struct slg, int fd)
 		else
 			other_lines(&slg, line);
 		slg.y_len++;
+		free(line);
 		i = get_next_line(fd, &line);
 	}
-	if (!slg.emp || !slg.wall || !slg.thg || !slg.exit || !slg.plr  || !slg.plr || !slg.flag)
+	if (!slg.emp || !slg.wall || !slg.thg || !slg.exit || !slg.plr  || !slg.enemy || !slg.flag)
 		slg.valid = 0;
 	free(line);
 	return (slg);

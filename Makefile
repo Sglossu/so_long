@@ -3,7 +3,7 @@ BNAME			=	so_long_bonus
 HEADER			=	includes
 LIB_HEADER 		=	libft
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra
+CFLAGS			=	#-Wall -Werror -Wextra
 RM				=	rm -f
 DIR_SRCS		=	srcs/
 DIR_BSRCS		=	bsrcs/
@@ -27,8 +27,8 @@ BHEAD			=	$(HEADER)/so_long_bonus.h
 LIB				=	libft/libft.a
 
 LIB_MLX 		=	./minilibx
-OPENGL			=	-lz -framework OpenGL -framework AppKit
-MLX_A			=	libmlx.dylib
+OPENGL			=	-framework OpenGL -framework AppKit
+MLX_A			=	libmlx.a
 MINILIBX_DIR 	=	minilibx/
 MINILIBX_A_DIR	=	$(MINILIBX_DIR)/$(MLX_A)
 
@@ -37,20 +37,22 @@ MINILIBX_A_DIR	=	$(MINILIBX_DIR)/$(MLX_A)
 .c.o:	
 	$(CC) $(CFLAGS) -c  -I$(HEADER) -I$(LIB_HEADER) $< -o $(<:.c=.o)
 
-all				:	$(NAME) $(MLX_A)
+all				:	$(NAME) 
 
-$(MLX_A)		:
-	$(MAKE)  -C $(LIB_MLX)
-	cp $(MINILIBX_A_DIR) $(MLX_A)
+
 
 $(NAME)		:	$(OBJS) $(HEAD)
 	$(MAKE) -C libft
+	$(MAKE)  -C $(LIB_MLX)
+	cp $(MINILIBX_A_DIR) $(MLX_A)
 	$(CC) -g $(CFLAGS)  $(LIB) -I$(HEADER) $(SRCS)  -L. $(LIB_NAME)  $(MINILIBX_A_DIR) $(OPENGL) -o $(NAME) 
 
-bonus			:	$(BNAME) $(MLX_A)
+bonus			:	$(BNAME) 
 
 $(BNAME)	:	$(BOBJS) $(BHEAD)
 	$(MAKE) -C libft
+	$(MAKE)  -C $(LIB_MLX)
+	cp $(MINILIBX_A_DIR) $(MLX_A)
 	$(CC) -g $(CFLAGS)  $(LIB) -I$(HEADER) $(BSRCS)  -L. $(LIB_NAME)  $(MINILIBX_A_DIR) $(OPENGL) -o $(BNAME) 
   
 
@@ -62,8 +64,8 @@ clean 		:
 	$(RM) $(BOBJS)
 
 fclean		:	clean
-	$(MAKE) clean -C libft
-	$(MAKE) fclean -C $(MINILIBX_DIR)
+	$(MAKE) fclean -C libft
+	$(MAKE) clean -C $(MINILIBX_DIR)
 	$(RM) $(MLX_A)
 	$(RM) $(NAME)
 	$(RM) $(BOBJS)

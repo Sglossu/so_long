@@ -17,8 +17,8 @@ HEAD			=	$(HEADER)/so_long.h
 LIB				=	libft/libft.a
 
 LIB_MLX 		=	./minilibx
-OPENGL			=	-lz -framework OpenGL -framework AppKit
-MLX_A			=	libmlx.dylib
+OPENGL			=	-framework OpenGL -framework AppKit
+MLX_A			=	libmlx.a
 MINILIBX_DIR 	=	minilibx/
 MINILIBX_A_DIR	=	$(MINILIBX_DIR)/$(MLX_A)
 

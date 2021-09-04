@@ -105,5 +105,6 @@ int	get_next_line(int fd, char **line)
 	}
 	else
 		*line = new_str(1);
+	
 	return (ft_free(NULL, NULL, NULL, ft_reader(line, buf, &stat_buf[fd], fd)));
 }

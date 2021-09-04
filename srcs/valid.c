@@ -83,6 +83,7 @@ static	t_struct valid_number_gnl(t_struct slg, int fd)
 		else
 			other_lines(&slg, line);
 		slg.y_len++;
+		free(line);
 		i = get_next_line(fd, &line);
 	}
 	if (!slg.emp || !slg.wall || !slg.thg || !slg.exit || !slg.plr || !slg.flag)
