@@ -1,96 +1,38 @@
 #include <so_long.h>
 
-static	void	ft_s(t_struct *slg)
+static	int	ft_button(t_struct *slg, int y, int x)
 {
-	if (slg->tab[slg->p_y + 1][slg->p_x] == 'C')
+	if (slg->tab[y][x] == 'C')
 	{
-		slg->tab[slg->p_y + 1][slg->p_x] = '0';
+		slg->tab[y][x] = '0';
 		slg->cltb--;
 	}
-	if (slg->tab[slg->p_y + 1][slg->p_x] == 'E' && !slg->cltb)
-		exit (0);
-	if (slg->tab[slg->p_y + 1][slg->p_x] == '0')
+	if (slg->tab[y][x] == 'E' && !slg->cltb)
 	{
-		slg->tab[slg->p_y + 1][slg->p_x] = 'P';
-		slg->tab[slg->p_y][slg->p_x] = '0';
-		slg->p_y++;
-		mlx_destroy_image(slg->img.mlx_ptr, slg->img.img);
-		// mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
-		// mlx_destroy_window(slg->img.mlx_ptr, slg->img.mlx_win);
-		draw(slg);
-		mlx_string_put(slg->img.mlx_ptr, slg->img.mlx_win, 25, slg->y_len * slg->scale -25, 0x00FFFFFF, ft_strjoin("step: ", ft_itoa(slg->step)));
-		slg->step++;
-		printf("step %d\n", slg->step);
+		printf("You are win!\n");
+		exit (0);
 	}
+	if (slg->tab[y][x] == 'V')
+	{
+		printf("You are loser!\n");
+		exit (0);
+	}
+	if (slg->tab[y][x] == '0')
+	{
+		slg->next_button = '0';
+		slg->tab[y][x] = 'P';
+		slg->tab[slg->p_y][slg->p_x] = '0';
+		return (1);
+	}
+	return (0);
 }
 
-static	void	ft_w(t_struct *slg)
+static	void	if_next_button_is_empty(t_struct *slg)
 {
-	if (slg->tab[slg->p_y - 1][slg->p_x] == 'C')
+	if (slg->next_button == '0')
 	{
-		slg->tab[slg->p_y - 1][slg->p_x] = '0';
-		slg->cltb--;
-	}
-	if (slg->tab[slg->p_y - 1][slg->p_x] == 'E' && !slg->cltb)
-		exit (0);
-	if (slg->tab[slg->p_y - 1][slg->p_x] == '0')
-	{
-		slg->tab[slg->p_y - 1][slg->p_x] = 'P';
-		slg->tab[slg->p_y][slg->p_x] = '0';
-		slg->p_y--;
-		mlx_destroy_image(slg->img.mlx_ptr, slg->img.img);
-		// mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
-		// mlx_destroy_window(slg->img.mlx_ptr, slg->img.mlx_win);
+		mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
 		draw(slg);
-		mlx_string_put(slg->img.mlx_ptr, slg->img.mlx_win, 25, slg->y_len * slg->scale -25, 0x00FFFFFF,  ft_strjoin("step: ", ft_itoa(slg->step)));
-		slg->step++;
-		printf("step %d\n", slg->step);
-	}
-}
-
-static	void	ft_a(t_struct *slg)
-{
-	if (slg->tab[slg->p_y][slg->p_x - 1] == 'C')
-	{
-		slg->tab[slg->p_y][slg->p_x - 1] = '0';
-		slg->cltb--;
-	}
-	if (slg->tab[slg->p_y][slg->p_x - 1] == 'E' && !slg->cltb)
-		exit (0);
-	if (slg->tab[slg->p_y][slg->p_x - 1] == '0')
-	{
-		slg->tab[slg->p_y][slg->p_x - 1] = 'P';
-		slg->tab[slg->p_y][slg->p_x] = '0';
-		slg->p_x--;
-		mlx_destroy_image(slg->img.mlx_ptr, slg->img.img);
-		// mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
-		// mlx_destroy_window(slg->img.mlx_ptr, slg->img.mlx_win);
-		draw(slg);
-		mlx_string_put(slg->img.mlx_ptr, slg->img.mlx_win, 25, slg->y_len * slg->scale -25, 0x00FFFFFF,  ft_strjoin("step: ", ft_itoa(slg->step)));
-		slg->step++;
-		printf("step %d\n", slg->step);
-	}
-}
-
-static	void	ft_d(t_struct *slg)
-{
-	if (slg->tab[slg->p_y][slg->p_x + 1] == 'C')
-	{
-		slg->tab[slg->p_y][slg->p_x + 1] = '0';
-		slg->cltb--;
-	}
-	if (slg->tab[slg->p_y][slg->p_x + 1] == 'E' && !slg->cltb)
-		exit (0);
-	if (slg->tab[slg->p_y][slg->p_x + 1] == '0')
-	{
-		slg->tab[slg->p_y][slg->p_x + 1] = 'P';
-		slg->tab[slg->p_y][slg->p_x] = '0';
-		slg->p_x++;
-		mlx_destroy_image(slg->img.mlx_ptr, slg->img.img);
-		// mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
-		// mlx_destroy_window(slg->img.mlx_ptr, slg->img.mlx_win);
-		draw(slg);
-		mlx_string_put(slg->img.mlx_ptr, slg->img.mlx_win, 25, slg->y_len * slg->scale -25, 0x00FFFFFF,  ft_strjoin("step: ", ft_itoa(slg->step)));
 		slg->step++;
 		printf("step %d\n", slg->step);
 	}
@@ -99,11 +41,24 @@ static	void	ft_d(t_struct *slg)
 void	play(t_struct *slg)
 {
 	if (slg->but == W)
-		ft_w(slg);
+	{
+		if (ft_button(slg, slg->p_y - 1, slg->p_x) == 1)
+			slg->p_y--;
+	}
 	else if (slg->but == S)
-		ft_s(slg);
+	{
+		if (ft_button(slg, slg->p_y + 1, slg->p_x) == 1)
+			slg->p_y++;
+	}
 	else if (slg->but == A)
-		ft_a(slg);
+	{
+		if (ft_button(slg, slg->p_y, slg->p_x - 1) == 1)
+			slg->p_x--;
+	}
 	else if (slg->but == D)
-		ft_d(slg);
+	{
+		if (ft_button(slg, slg->p_y, slg->p_x + 1) == 1)
+			slg->p_x++;
+	}
+	if_next_button_is_empty(slg);
 }

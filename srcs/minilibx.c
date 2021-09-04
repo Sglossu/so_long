@@ -11,7 +11,6 @@
 int	key_hook(int keycode, t_data *vars)
 {
 	(void)vars;
-	// printf("step: %d\n", keycode);
 	return (keycode);
 }
 
@@ -37,7 +36,9 @@ int	f_close(int keycode, t_struct *slg)
 void	minilibx(t_struct *slg)
 {
 	slg->img.mlx_ptr = mlx_init();
-	slg->img.mlx_win = mlx_new_window(slg->img.mlx_ptr, slg->x_len * (slg->scale - 1), slg->y_len * (slg->scale - 1), "so_long");
+	slg->img.mlx_win = mlx_new_window(slg->img.mlx_ptr, \
+	slg->x_len * (slg->scale), slg->y_len * (slg->scale), "so_long");
+	init_picture(slg);
 	draw(slg);
 	mlx_hook(slg->img.mlx_win, 2, 0, f_close, slg);
 	mlx_hook(slg->img.mlx_win, 17, 0, close_window, NULL);

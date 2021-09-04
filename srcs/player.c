@@ -1,4 +1,4 @@
-#include "so_long_bonus.h"
+#include "so_long.h"
 
 int	animation(t_struct *slg)
 {

@@ -16,17 +16,28 @@
 
 typedef struct s_data
 {
-	
 	void		*mlx_win;
 	void		*mlx_ptr;
 	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	// char		*addr;
+	// int			bits_per_pixel;
+	// int			line_length;
+	// int			endian;
+	char		*player_cur;
+	char		*player_or;
+	char		*player_cr;
+	char		*player_ol;
+	char		*player_cl;
+	char		*player_open;
+	char		*player_close;
+	void		*exit;
+	void		*enemy;
+	void		*wall;
+	void		*thing;
+	void		*back;
 }				t_data;
 
-typedef struct	s_struct
+typedef struct s_struct
 {
 	char	**tab;
 	int		x_len;
@@ -46,19 +57,24 @@ typedef struct	s_struct
 	int		cltb;
 	int		step;
 	t_data	img;
-	char	*name_map;
+	int		ani;
+	int		count_img;
+	char	next_button;
 }				t_struct;
 
 t_struct	init_struct(t_struct slg);
-t_struct	read_and_valid(t_struct slg, int fd);
+void		read_and_valid(t_struct *slg, int fd);
 void		reading_in_buf(t_struct *slg, int fd);
 void		minilibx(t_struct *slg);
 void		draw(t_struct *slg);
+void		init_picture(t_struct *slg);
+void		errors(void);
 
+int			key_hook(int keycode, t_data *vars);
+int			close_window(void);
+int			f_close(int keycode, t_struct *slg);
 void		my_mlx_pixel_put(t_struct *slg, int x, int y, int color);
 void		play(t_struct *slg);
 int			key_hook(int keycode, t_data *vars);
-void		draw_image(t_struct *slg, int i, int j, int color);
-void		set_image(t_struct *slg,  int i, int j);
 
 #endif

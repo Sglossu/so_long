@@ -20,46 +20,51 @@
 // 	}
 // }
 
-// void	real_draw(t_struct *slg, char *relative_path, int i, int j)
-// {
-// 	int		img_width;
-// 	int		img_height;
-
-	
-// 	slg->img.img = mlx_xpm_file_to_image(slg->img.mlx_ptr, relative_path, &img_width, &img_height);
-
-// 	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, slg->img.img, i * (slg->scale - 1), j * (slg->scale - 1));
-// }
-
-void	my_mlx_put_image_to_window(t_struct *slg, void *img_ptr, int i, int j)
+static	void	my_mlx_image_to_win(t_struct *slg, void *img_ptr, int i, int j)
 {
-	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, img_ptr, i * (slg->scale), j * (slg->scale));
+	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, \
+	img_ptr, i * (slg->scale), j * (slg->scale));
 }
 
-void	draw_back(t_struct *slg)
+static	void	some_cndtns_f_while(t_struct *slg, int i, int j)
 {
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < slg->y_len)
+	if (slg->tab[j][i] == '1')
 	{
-		i = 0;
-		while (i < slg->x_len)
-		{
-			my_mlx_put_image_to_window(slg, slg->img.back, i, j);
-			i++;
-		}
-		j++;
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+		my_mlx_image_to_win(slg, slg->img.wall, i, j);
+	}
+	else if (slg->tab[j][i] == '0')
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+	else if (slg->tab[j][i] == 'C')
+	{
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+		my_mlx_image_to_win(slg, slg->img.thing, i, j);
+	}
+	else if (slg->tab[j][i] == 'P')
+	{
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+		my_mlx_image_to_win(slg, slg->img.player_cur, i, j);
+	}
+	else if (slg->tab[j][i] == 'E')
+	{
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+		my_mlx_image_to_win(slg, slg->img.exit, i, j);
 	}
 }
 
 void	draw(t_struct *slg)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*str_strjoin;
+	char	*str_itoa;
 
-	// draw_back(slg);
+	str_itoa = ft_itoa(slg->step);
+	if (!str_itoa)
+		errors();
+	str_strjoin = ft_strjoin("step: ", str_itoa);
+	if (!str_strjoin)
+		errors();
 	mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
 	j = 0;
 	while (j < slg->y_len)
@@ -67,37 +72,16 @@ void	draw(t_struct *slg)
 		i = 0;
 		while (i < slg->x_len)
 		{
-			if (slg->tab[j][i] == '1')
+			some_cndtns_f_while(slg, i, j);
+			if (slg->tab[j][i] == 'V')
 			{
-				my_mlx_put_image_to_window(slg, slg->img.back, i, j);
-				my_mlx_put_image_to_window(slg, slg->img.wall, i, j);
-			}
-			else if (slg->tab[j][i] == '0')
-				my_mlx_put_image_to_window(slg, slg->img.back, i, j);
-			else if (slg->tab[j][i] == 'C')
-			{
-				my_mlx_put_image_to_window(slg, slg->img.back, i, j);
-				my_mlx_put_image_to_window(slg, slg->img.thing, i, j);
-			}
-			else if (slg->tab[j][i] == 'P')
-			{
-				my_mlx_put_image_to_window(slg, slg->img.back, i, j);
-				my_mlx_put_image_to_window(slg, slg->img.player_cur, i, j);
-			}
-			else if (slg->tab[j][i] == 'E')
-			{
-				my_mlx_put_image_to_window(slg, slg->img.back, i, j);
-				my_mlx_put_image_to_window(slg, slg->img.exit, i, j);
-			}
-			else if (slg->tab[j][i] == 'V')
-			{
-				my_mlx_put_image_to_window(slg, slg->img.back, i, j);
-				my_mlx_put_image_to_window(slg, slg->img.enemy, i, j);
+				my_mlx_image_to_win(slg, slg->img.back, i, j);
+				my_mlx_image_to_win(slg, slg->img.enemy, i, j);
 			}
 			i++;
 		}
 		j++;
 	}
-	// mlx_destroy_image(slg->img.mlx_ptr, slg->img.exit);
-	// mlx_destroy_image(slg->img.mlx_ptr, slg->img.exit);
+	mlx_string_put(slg->img.mlx_ptr, slg->img.mlx_win, 25, \
+	slg->y_len * slg->scale -25, 0x00003153, str_strjoin);
 }

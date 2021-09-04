@@ -12,13 +12,16 @@
 // 	}
 // }
 
-static	void	valid_arguments(t_struct *slg, int argc, char **argv)
+static	void	valid_argc(int argc)
 {
 	if (argc != 2)
-	{
-		printf("Error\n");
-		exit (1);
-	}
+		errors();
+}
+
+void	errors(void)
+{
+	printf("Error\n");
+	exit (-1);
 }
 
 int	main(int argc, char **argv)
@@ -28,28 +31,19 @@ int	main(int argc, char **argv)
 
 	slg.valid = 1;
 	slg = init_struct(slg);
-	valid_arguments(&slg, argc, argv);
+	valid_argc(argc);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		slg.valid = 0;
-	if (slg.valid)
-		slg = read_and_valid(slg, fd);
+		errors();
+	read_and_valid(&slg, fd);
 	close(fd);
-	if (!slg.valid)
-	{
-		ft_putstr_fd("Error\n", 1);
-		exit (-1);
-	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		slg.valid = 0;
+		errors();
 	reading_in_buf(&slg, fd);
-	if (!slg.valid)
-		ft_putstr_fd("Error\n", 1);
 	close(fd);
 	// draw_tab(&slg);
-	if (slg.valid)
-		minilibx(&slg);
+	minilibx(&slg);
 	exit(0);
 	return (0);
 }

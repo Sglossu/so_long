@@ -27,14 +27,12 @@ static	int	ft_button(t_struct *slg, int y, int x)
 	return (0);
 }
 
-void	next_button(t_struct *slg)
+static	void	if_next_button_is_empty(t_struct *slg)
 {
 	if (slg->next_button == '0')
 	{
-		// mlx_destroy_image(slg->img.mlx_ptr, slg->img.wall);
 		mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
 		draw(slg);
-		// mlx_string_put(slg->img.mlx_ptr, slg->img.mlx_win, 25, slg->y_len * slg->scale -25, 0x00FFFFFF,  ft_strjoin("step: ", ft_itoa(slg->step)));
 		slg->step++;
 		printf("step %d\n", slg->step);
 	}
@@ -45,7 +43,7 @@ void	play(t_struct *slg)
 	if (slg->but == W)
 	{
 		if (ft_button(slg, slg->p_y - 1, slg->p_x) == 1)
-		slg->p_y--;
+			slg->p_y--;
 	}
 	else if (slg->but == S)
 	{
@@ -64,5 +62,5 @@ void	play(t_struct *slg)
 		if (ft_button(slg, slg->p_y, slg->p_x + 1) == 1)
 			slg->p_x++;
 	}
-	next_button(slg);
+	if_next_button_is_empty(slg);
 }

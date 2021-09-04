@@ -20,21 +20,36 @@
 // 	}
 // }
 
-void	real_draw(t_struct *slg, char *relative_path, int i, int j)
+static	void	my_mlx_image_to_win(t_struct *slg, void *img_ptr, int i, int j)
 {
-	int		img_width;
-	int		img_height;
+	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, \
+	img_ptr, i * (slg->scale), j * (slg->scale));
+}
 
-	
-	slg->img.img = mlx_xpm_file_to_image(slg->img.mlx_ptr, relative_path, &img_width, &img_height);
-	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, slg->img.img, i * (slg->scale - 1), j * (slg->scale - 1));
-	if (slg->img.img == NULL)
+static	void	some_cndtns_f_while(t_struct *slg, int i, int j)
+{
+	if (slg->tab[j][i] == '1')
 	{
-		ft_putstr_fd("error/n", 1);
-		exit (-1);
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+		my_mlx_image_to_win(slg, slg->img.wall, i, j);
 	}
-
-
+	else if (slg->tab[j][i] == '0')
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+	else if (slg->tab[j][i] == 'C')
+	{
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+		my_mlx_image_to_win(slg, slg->img.thing, i, j);
+	}
+	else if (slg->tab[j][i] == 'P')
+	{
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+		my_mlx_image_to_win(slg, slg->img.player_cur, i, j);
+	}
+	else if (slg->tab[j][i] == 'E')
+	{
+		my_mlx_image_to_win(slg, slg->img.back, i, j);
+		my_mlx_image_to_win(slg, slg->img.exit, i, j);
+	}
 }
 
 void	draw(t_struct *slg)
@@ -42,30 +57,19 @@ void	draw(t_struct *slg)
 	int	i;
 	int	j;
 
+	mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
 	j = 0;
 	while (j < slg->y_len)
 	{
 		i = 0;
 		while (i < slg->x_len)
 		{
-			if (slg->tab[j][i] == '1')
-				// draw_image(slg, i, j, 0x00FF0000);
-				real_draw(slg, "texture/wall.xpm",  i, j);
-			if (slg->tab[j][i] == '0')
-				// draw_image(slg, i, j, 0x009999FF);
-				real_draw(slg, "texture/back2.xpm",  i, j);
-			if (slg->tab[j][i] == 'C')
-				// draw_image(slg, i, j, 0x00000000);
-				real_draw(slg, "texture/thing.xpm",  i, j);
-			if (slg->tab[j][i] == 'P')
+			some_cndtns_f_while(slg, i, j);
+			if (slg->tab[j][i] == 'V')
 			{
-				// draw_image(slg, i, j, 0x009FFF00);	
-				real_draw(slg, "texture/back2.xpm", i, j);
-				real_draw(slg, "texture/ALEXANDRA.xpm", i, j);
+				my_mlx_image_to_win(slg, slg->img.back, i, j);
+				my_mlx_image_to_win(slg, slg->img.enemy, i, j);
 			}
-			if (slg->tab[j][i] == 'E')
-				// draw_image(slg, i, j, 0x00000055);	
-				real_draw(slg, "texture/exit.xpm",  i, j);	
 			i++;
 		}
 		j++;
