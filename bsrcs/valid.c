@@ -94,6 +94,6 @@ void	read_and_valid(t_struct *slg, int fd)
 	}
 	if (!slg->emp || !slg->wall || !slg->thg || !slg->exit || !slg->plr \
 	|| !slg->enemy || !slg->flag)
-		slg->valid = 0;
+		errors();
 	free(line);
 }

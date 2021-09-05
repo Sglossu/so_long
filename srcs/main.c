@@ -12,9 +12,16 @@
 // 	}
 // }
 
-static	void	valid_argc(int argc)
+static	void	valid_argc_argv(int argc, char **argv)
 {
+	char	*str;
+
 	if (argc != 2)
+		errors();
+	str = argv[1];
+	while (*str != '.' && *str)
+		str++;
+	if (ft_strcmp(str, ".ber") != 0)
 		errors();
 }
 
@@ -31,7 +38,7 @@ int	main(int argc, char **argv)
 
 	slg.valid = 1;
 	slg = init_struct(slg);
-	valid_argc(argc);
+	valid_argc_argv(argc, argv);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		errors();

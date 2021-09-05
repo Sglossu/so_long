@@ -1,25 +1,5 @@
 #include <so_long_bonus.h>
 
-// void	draw_image(t_struct *slg, int i, int j, int color)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	i *= slg->scale;
-// 	j *= slg->scale;
-// 	y = 0;
-// 	while (y < slg->scale)
-// 	{
-// 		x = 0;
-// 		while (x < slg->scale)
-// 		{
-// 			my_mlx_pixel_put(slg, x + i, y + j, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
 static	void	my_mlx_image_to_win(t_struct *slg, void *img_ptr, int i, int j)
 {
 	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, \
