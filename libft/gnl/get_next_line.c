@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 19:26:39 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 19:29:28 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 static	int	ft_free(char **line, char **buf, char **stat_buf, int ret)
@@ -105,6 +117,5 @@ int	get_next_line(int fd, char **line)
 	}
 	else
 		*line = new_str(1);
-	
 	return (ft_free(NULL, NULL, NULL, ft_reader(line, buf, &stat_buf[fd], fd)));
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   play.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:15:52 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 21:45:00 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long.h>
 
 static	int	ft_button(t_struct *slg, int y, int x)
@@ -31,6 +43,7 @@ static	void	if_next_button_is_empty(t_struct *slg)
 {
 	if (slg->next_button == '0')
 	{
+		slg->next_button = '\0';
 		mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
 		draw(slg);
 		slg->step++;

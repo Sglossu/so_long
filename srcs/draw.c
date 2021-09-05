@@ -1,24 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:16:22 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 17:16:23 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long.h>
-
-// void	draw_image(t_struct *slg, int i, int j, int color)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	i *= slg->scale;
-// 	j *= slg->scale;
-// 	y = 0;
-// 	while (y < slg->scale)
-// 	{
-// 		x = 0;
-// 		while (x < slg->scale)
-// 		{
-// 			my_mlx_pixel_put(slg, x + i, y + j, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
 
 static	void	my_mlx_image_to_win(t_struct *slg, void *img_ptr, int i, int j)
 {

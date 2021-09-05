@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:17:00 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 17:17:01 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -19,10 +31,6 @@ typedef struct s_data
 	void		*mlx_win;
 	void		*mlx_ptr;
 	void		*img;
-	// char		*addr;
-	// int			bits_per_pixel;
-	// int			line_length;
-	// int			endian;
 	char		*player_cur;
 	char		*player_or;
 	char		*player_cr;

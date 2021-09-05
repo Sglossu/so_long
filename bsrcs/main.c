@@ -1,16 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:28:17 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 22:00:03 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long_bonus.h>
-
-// static	void	draw_tab(t_struct *slg)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (slg->tab[i])
-// 	{
-// 		printf("%s\n", slg->tab[i]);
-// 		i++;
-// 	}
-// }
 
 static	void	valid_argc_argv(int argc, char **argv)
 {
@@ -39,6 +39,10 @@ int	main(int argc, char **argv)
 	slg.valid = 1;
 	slg = init_struct(slg);
 	valid_argc_argv(argc, argv);
+	fd = open(argv[1], O_DIRECTORY);
+	if (fd != -1)
+		errors();
+	close(fd);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		errors();
@@ -49,7 +53,6 @@ int	main(int argc, char **argv)
 		errors();
 	reading_in_buf(&slg, fd);
 	close(fd);
-	// draw_tab(&slg);
 	minilibx(&slg);
 	exit(0);
 	return (0);

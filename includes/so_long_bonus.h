@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:16:50 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 17:17:27 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
@@ -19,10 +31,6 @@ typedef struct s_data
 	void		*mlx_win;
 	void		*mlx_ptr;
 	void		*img;
-	// char		*addr;
-	// int			bits_per_pixel;
-	// int			line_length;
-	// int			endian;
 	char		*player_cur;
 	char		*player_or;
 	char		*player_cr;
@@ -76,11 +84,8 @@ void		errors(void);
 int			key_hook(int keycode, t_data *vars);
 int			close_window(void);
 int			f_close(int keycode, t_struct *slg);
-void		my_mlx_pixel_put(t_struct *slg, int x, int y, int color);
 void		play(t_struct *slg);
 int			key_hook(int keycode, t_data *vars);
-void		draw_image(t_struct *slg, int i, int j, int color);
-void		set_image(t_struct *slg, int i, int j);
 int			animation(t_struct *slg);
 
 #endif

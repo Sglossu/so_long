@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:15:28 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 19:25:42 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long.h>
 
 static	int	valid_char(char *line)
@@ -91,6 +103,6 @@ void	read_and_valid(t_struct *slg, int fd)
 	}
 	if (!slg->emp || !slg->wall || !slg->thg || !slg->exit || !slg->plr \
 	|| !slg->flag)
-		slg->valid = 0;
+		errors();
 	free(line);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:18:06 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 17:28:34 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long_bonus.h>
 
 static	int	valid_char(char *line)
@@ -10,7 +22,6 @@ static	int	valid_char(char *line)
 		if (line[i] == '0' || line[i] == '1' || line[i] == 'C' \
 		|| line[i] == 'E' || line[i] == 'P' || line[i] == 'V')
 			i++;
-		
 		else
 			return (-1);
 	}

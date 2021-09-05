@@ -1,12 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minilibx.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:15:54 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 17:16:05 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long.h>
-
-// void	my_mlx_pixel_put(t_struct *slg, int x, int y, int color)
-// {
-// 	char *dst;
-
-// 	dst = slg->img.addr + (y * slg->img.line_length + x * (slg->img.bits_per_pixel / 8));
-// 	*(unsigned int*)dst = color;
-// }
 
 int	key_hook(int keycode, t_data *vars)
 {

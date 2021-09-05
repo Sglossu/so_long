@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   play.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:18:14 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 21:38:51 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long_bonus.h>
 
 static	int	ft_button(t_struct *slg, int y, int x)
@@ -7,17 +19,17 @@ static	int	ft_button(t_struct *slg, int y, int x)
 		slg->tab[y][x] = '0';
 		slg->cltb--;
 	}
-	if (slg->tab[y][x] == 'E' && !slg->cltb)
+	else if (slg->tab[y][x] == 'E' && !slg->cltb)
 	{
 		printf("You are win!\n");
 		exit (0);
 	}
-	if (slg->tab[y][x] == 'V')
+	else if (slg->tab[y][x] == 'V')
 	{
 		printf("You are loser!\n");
 		exit (0);
 	}
-	if (slg->tab[y][x] == '0')
+	else if (slg->tab[y][x] == '0')
 	{
 		slg->next_button = '0';
 		slg->tab[y][x] = 'P';
@@ -31,6 +43,7 @@ static	void	if_next_button_is_empty(t_struct *slg)
 {
 	if (slg->next_button == '0')
 	{
+		slg->next_button = '\0';
 		mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
 		draw(slg);
 		slg->step++;

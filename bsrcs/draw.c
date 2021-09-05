@@ -1,9 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/05 17:28:04 by sglossu           #+#    #+#             */
+/*   Updated: 2021/09/05 17:28:05 by sglossu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long_bonus.h>
 
 static	void	my_mlx_image_to_win(t_struct *slg, void *img_ptr, int i, int j)
 {
 	mlx_put_image_to_window(slg->img.mlx_ptr, slg->img.mlx_win, \
 	img_ptr, i * (slg->scale), j * (slg->scale));
+}
+
+static	void	my_mlx_str_put(t_struct *slg)
+{
+	char	*str_strjoin;
+	char	*str_itoa;
+
+	str_itoa = ft_itoa(slg->step);
+	if (!str_itoa)
+		errors();
+	str_strjoin = ft_strjoin("step: ", str_itoa);
+	if (!str_strjoin)
+		errors();
+	mlx_string_put(slg->img.mlx_ptr, slg->img.mlx_win, 25, \
+	slg->y_len * slg->scale - 25, 0x00003153, str_strjoin);
+	free (str_itoa);
+	free (str_strjoin);
 }
 
 static	void	some_cndtns_f_while(t_struct *slg, int i, int j)
@@ -36,15 +65,7 @@ void	draw(t_struct *slg)
 {
 	int		i;
 	int		j;
-	char	*str_strjoin;
-	char	*str_itoa;
 
-	str_itoa = ft_itoa(slg->step);
-	if (!str_itoa)
-		errors();
-	str_strjoin = ft_strjoin("step: ", str_itoa);
-	if (!str_strjoin)
-		errors();
 	mlx_clear_window(slg->img.mlx_ptr, slg->img.mlx_win);
 	j = 0;
 	while (j < slg->y_len)
@@ -62,6 +83,5 @@ void	draw(t_struct *slg)
 		}
 		j++;
 	}
-	mlx_string_put(slg->img.mlx_ptr, slg->img.mlx_win, 25, \
-	slg->y_len * slg->scale -25, 0x00003153, str_strjoin);
+	my_mlx_str_put(slg);
 }

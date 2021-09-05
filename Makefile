@@ -68,6 +68,6 @@ fclean		:	clean
 	$(MAKE) clean -C $(MINILIBX_DIR)
 	$(RM) $(MLX_A)
 	$(RM) $(NAME)
-	$(RM) $(BOBJS)
+	$(RM) $(BNAME)
 
 re			:	fclean all

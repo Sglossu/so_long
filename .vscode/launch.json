@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "./so_long_bonus",
-			"args": ["maps/map5.ber"],
+			"args": ["maps/map4.ber"],
 			"cwd": "${workspaceFolder}"
 		}
 	]
