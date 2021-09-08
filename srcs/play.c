@@ -6,7 +6,7 @@
 /*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 17:15:52 by sglossu           #+#    #+#             */
-/*   Updated: 2021/09/05 21:45:00 by sglossu          ###   ########.fr       */
+/*   Updated: 2021/09/08 21:03:05 by sglossu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,19 @@
 
 static	int	ft_button(t_struct *slg, int y, int x)
 {
-	if (slg->tab[y][x] == 'C')
+	if (slg->tab[y][x] == 'C' || slg->tab[y][x] == '0')
 	{
-		slg->tab[y][x] = '0';
-		slg->cltb--;
-	}
-	if (slg->tab[y][x] == 'E' && !slg->cltb)
-	{
-		printf("You are win!\n");
-		exit (0);
-	}
-	if (slg->tab[y][x] == 'V')
-	{
-		printf("You are loser!\n");
-		exit (0);
-	}
-	if (slg->tab[y][x] == '0')
-	{
+		if (slg->tab[y][x] == 'C')
+			slg->cltb--;
 		slg->next_button = '0';
 		slg->tab[y][x] = 'P';
 		slg->tab[slg->p_y][slg->p_x] = '0';
 		return (1);
+	}
+	else if (slg->tab[y][x] == 'E' && !slg->cltb)
+	{
+		printf("You are win!\n");
+		exit (0);
 	}
 	return (0);
 }

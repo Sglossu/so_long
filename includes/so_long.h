@@ -6,7 +6,7 @@
 /*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 17:17:00 by sglossu           #+#    #+#             */
-/*   Updated: 2021/09/05 17:17:01 by sglossu          ###   ########.fr       */
+/*   Updated: 2021/09/08 23:33:44 by sglossu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_struct
 	char	thg;
 	char	exit;
 	char	plr;
-	int		valid;
 	int		flag;
 	int		but;
 	int		scale;

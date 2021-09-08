@@ -6,7 +6,7 @@
 /*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 17:27:45 by sglossu           #+#    #+#             */
-/*   Updated: 2021/09/05 17:27:46 by sglossu          ###   ########.fr       */
+/*   Updated: 2021/09/08 23:34:28 by sglossu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ t_struct	init_struct(t_struct slg)
 	slg.thg = '\0';
 	slg.exit = '\0';
 	slg.plr = '\0';
-	slg.valid = 1;
 	slg.flag = 1;
-	slg.scale = 10;
+	slg.scale = 50;
 	slg.p_x = 0;
 	slg.p_y = 0;
 	slg.cltb = 0;

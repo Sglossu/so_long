@@ -6,7 +6,7 @@
 /*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 17:15:46 by sglossu           #+#    #+#             */
-/*   Updated: 2021/09/05 17:15:47 by sglossu          ###   ########.fr       */
+/*   Updated: 2021/09/08 23:39:23 by sglossu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ static	void	memory_al(t_struct *slg)
 
 	i = 0;
 	slg->tab = (char **)malloc(sizeof(char *) * (slg->y_len + 1));
+	if (slg->tab == NULL)
+		errors();
 	slg->tab[slg->y_len] = NULL;
 	while (i < slg->y_len)
 	{
 		slg->tab[i] = (char *)malloc(sizeof(char) * (slg->x_len + 1));
+		if (slg->tab[i] == NULL)
+			errors();
 		slg->tab[i][slg->x_len] = '\0';
 		i++;
 	}

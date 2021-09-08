@@ -6,7 +6,7 @@
 /*   By: sglossu <sglossu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 17:15:28 by sglossu           #+#    #+#             */
-/*   Updated: 2021/09/05 19:25:42 by sglossu          ###   ########.fr       */
+/*   Updated: 2021/09/08 23:38:12 by sglossu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	int	valid_char(char *line)
 	return (1);
 }
 
-static	void	first_end_lines(t_struct *slg, char *line)
+static	void	first_end_lines(char *line)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ static	void	first_end_lines(t_struct *slg, char *line)
 	while (line[i])
 	{
 		if (line[i] != '1')
-			slg->valid = 0;
+			errors();
 		i++;
 	}
 }
@@ -69,15 +69,13 @@ static	void	other_lines(t_struct *slg, char *line, int i)
 static	void	valid_gnl(t_struct *slg, char **line, int i, int j)
 {
 	if (ft_strlen(*line) != slg->x_len)
-		slg->valid = 0;
+		errors();
 	if (valid_char(*line) > 0)
 		j++;
 	else
 		errors();
-	if (!slg->valid)
-		errors();
-	if ((i == 0 || !slg->y_len) && slg->valid)
-		first_end_lines(slg, *line);
+	if (i == 0 || !slg->y_len)
+		first_end_lines(*line);
 	else
 	{
 		other_lines(slg, *line, 1);
@@ -104,5 +102,10 @@ void	read_and_valid(t_struct *slg, int fd)
 	if (!slg->emp || !slg->wall || !slg->thg || !slg->exit || !slg->plr \
 	|| !slg->flag)
 		errors();
+	if (slg->x_len > 200 || slg->y_len > 200)
+	{
+		printf("Your map is too much!\n");
+		exit (-1);
+	}
 	free(line);
 }
